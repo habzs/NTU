@@ -29,7 +29,7 @@ public class SalePerson implements Comparable<Object> {
     }
 
     public boolean equals(Object o) {
-        if (o instanceof SalePerson) /* instanceof: check if o is the same object type as SalePerson */ {
+        if (o instanceof SalePerson) { /* instanceof: check if o is the same object type as SalePerson */
             SalePerson newPerson = (SalePerson) o;
 
             if (this.firstName == newPerson.getFirstName() && this.lastName == newPerson.getLastName()) {
