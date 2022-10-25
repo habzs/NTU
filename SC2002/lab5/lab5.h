@@ -1,0 +1,184 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+enum COLOR
+{
+    Green,
+    Blue,
+    White,
+    Black,
+    Brown
+};
+
+class Animal
+{
+private: // attributes
+    string _name;
+    COLOR _color;
+
+public:
+    Animal() : _name("unknown")
+    {
+        cout << "constructing Animal object" << _name << endl;
+    }
+
+    Animal(string n, COLOR c) : _name("unknown"), _color(White)
+    {
+        _name = n;
+        _color = c;
+
+        cout << "Animal() constructor called." << endl;
+        cout << "Animal() name: " << _name << endl;
+        cout << "-=-=-=-=-=-" << endl;
+    }
+
+    ~Animal()
+    {
+        cout << "destructing Animal object" << _name << endl;
+    }
+    virtual void speak()
+    {
+        cout << "Animal speaks" << endl;
+    }
+
+    virtual void move()
+    {
+        cout << "Mammal moves\n";
+    }
+
+    // setters and getters
+    string getName()
+    {
+        return _name;
+    }
+};
+
+class Mammal : public Animal
+{
+public:
+    Mammal()
+    {
+        cout << "Default constructor";
+    }
+
+    Mammal(string n, COLOR c) : Animal(n, c)
+    {
+        cout << "constructing Mammal object: " << n << endl;
+    };
+
+    ~Mammal()
+    {
+        cout << "destructing Mammal object" << endl;
+    }
+
+    virtual void eat()
+    {
+        cout << "Mammal eats" << endl;
+    }
+};
+
+// 3.2.2
+
+class Dog : public Mammal
+{
+private:
+    string _owner;
+
+public:
+    Dog(string name, COLOR color, string OWNER) : Mammal(name, color)
+    {
+        _owner = OWNER;
+
+        cout << "--dog constructed--" << endl;
+        cout << "dog name: " << name << endl;
+        cout << "dog color: " << color << endl;
+        cout << "dog owner: " << _owner << endl;
+    }
+
+    ~Dog()
+    {
+        cout << "dog DECONSTRUCTED\n";
+    }
+
+    void speak() // overrides speak() function from Animal class
+    {
+        cout << "woof!" << endl;
+    }
+
+    void move()
+    {
+        cout << "dog: "
+             << "moved!" << endl;
+    }
+
+    void eat()
+    {
+        cout << Animal::getName() << " is eating!\n";
+    }
+};
+
+class Cat : public Mammal
+{
+private:
+    string _owner;
+
+public:
+    Cat(string n, COLOR c, string owner) : Mammal(n, c)
+    {
+        _owner = owner;
+    }
+
+    ~Cat()
+    {
+        cout << "cat is destroyed\n";
+    }
+
+    void speak()
+    {
+        cout << Animal::getName() << " goes meow\n";
+    }
+
+    void move()
+    {
+        cout << Animal::getName() << " pounces\n";
+    }
+
+    void eat()
+    {
+        cout << Animal::getName() << " eats\n";
+    }
+};
+
+class Lion : public Mammal
+{
+private:
+    string _owner;
+
+public:
+    Lion(string n, COLOR c, string owner) : Mammal(n, c)
+    {
+        _owner = owner;
+    }
+
+    ~Lion()
+    {
+        cout << "lion destroyed\n";
+    }
+
+    void speak()
+    {
+        cout << Animal::getName() << " roars.\n";
+    }
+
+    void move()
+    {
+        cout << Animal::getName() << " waddles.\n";
+    }
+
+    void eat()
+    {
+        cout << Animal::getName() << " eats.\n";
+    }
+};
